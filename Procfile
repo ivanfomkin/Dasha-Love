@@ -1,1 +1,1 @@
-web: java -jar target/Dasha-Love-1.0.0.jar $PORT
+web: java -jar target/Dasha-Love-1.0.0.jar -Dserver.port=$PORT
