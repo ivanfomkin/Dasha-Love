@@ -6,11 +6,16 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
+import ru.ifomkin.dashalove.service.SearchHistoryService;
 
+@Component
 public class DashaLoveView extends HorizontalLayout {
+    private final SearchHistoryService service;
     private Text text;
 
-    public DashaLoveView() {
+    public DashaLoveView(SearchHistoryService service) {
+        this.service = service;
         TextField textField = new TextField();
         textField.setPlaceholder("Введите имя");
         textField.setAutofocus(true);
@@ -25,6 +30,7 @@ public class DashaLoveView extends HorizontalLayout {
     }
 
     private String checkResult(String name) {
+        service.save(name);
         if (name == null || name.isEmpty()) {
             return "Введите имя!";
         } else if (checkDariaName(name)) {
